@@ -1,0 +1,1 @@
+document.querySelector("html").dataset.snipo=JSON.stringify({playerConfig:window.playerConfig});
