@@ -16,7 +16,9 @@
   "action": {
     "default_title": "Snipo Open",
     "default_icon": {
-      "16": "icon.png"
+      "16": "icon.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
     }
   },
   "side_panel": {
@@ -28,19 +30,12 @@
   "content_scripts": [
     {
       "matches": [
-        "https://*.coursera.org/*"
-      ],
-      "js": [
-        "content.js"
-      ],
-      "run_at": "document_start"
-    },
-    {
-      "matches": [
+        "https://*.coursera.org/*",
         "https://*.youtube.com/*"
       ],
       "js": [
-        "content.js"
+        "content.js",
+        "injected.js"
       ],
       "run_at": "document_start"
     }
@@ -48,7 +43,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "injected.js"
+        "assets/*"
       ],
       "matches": [
         "https://*.coursera.org/*",
@@ -66,8 +61,8 @@
     },
     "screen": {
       "suggested_key": {
-        "default": "Ctrl+Shift+,",
-        "mac": "Command+Shift+,"
+        "default": "Ctrl+Shift+Period",
+        "mac": "Command+Shift+Period"
       },
       "description": "Take screenshot"
     },
@@ -78,47 +73,12 @@
       },
       "description": "Play/Pause video"
     },
-    "back5s": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+8",
-        "mac": "Command+Shift+8"
-      },
-      "description": "Seek backward 5 seconds"
-    },
-    "skip5s": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+9",
-        "mac": "Command+Shift+9"
-      },
-      "description": "Seek forward 5 seconds"
-    },
-    "speed-inc": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+0",
-        "mac": "Command+Shift+0"
-      },
-      "description": "Increase speed"
-    },
-    "speed-dec": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+7",
-        "mac": "Command+Shift+7"
-      },
-      "description": "Decrease speed"
-    },
     "transcript": {
       "suggested_key": {
-        "default": "Ctrl+Shift+.",
-        "mac": "Command+Shift+."
+        "default": "Ctrl+Shift+T",
+        "mac": "Command+Shift+T"
       },
       "description": "Toggle transcript"
-    },
-    "clip": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y",
-        "mac": "Command+Shift+Y"
-      },
-      "description": "Capture video clip"
     }
   },
   "icons": {

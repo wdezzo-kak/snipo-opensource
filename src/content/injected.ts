@@ -9,7 +9,7 @@ function injectUI(): void {
   button.className = 'snipo-open-btn'
   button.textContent = '📝 Snipo'
   button.title = 'Add note with Snipo Open'
-  
+
   Object.assign(button.style, {
     position: 'fixed',
     bottom: '20px',
@@ -25,8 +25,7 @@ function injectUI(): void {
   })
 
   button.addEventListener('click', () => {
-    chrome.runtime.sendMessage({ type: 'ADD_NOTE' })
-    chrome.sidePanel.open()
+    chrome.runtime.sendMessage({ type: 'OPEN_SIDEPANEL' })
   })
 
   document.body.appendChild(button)

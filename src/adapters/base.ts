@@ -10,6 +10,15 @@ export interface PlatformAdapter {
   seek(seconds: number): void
   setSpeed(rate: number): void
   getCurrentTime(): number
+  isPlaying(): boolean
+  getTranscript(): Promise<TranscriptSegment[]>
+  getCurrentSegment(currentTime: number): Promise<string | null>
+}
+
+export interface TranscriptSegment {
+  start: number
+  end: number
+  text: string
 }
 
 export abstract class BaseAdapter implements PlatformAdapter {
@@ -42,5 +51,26 @@ export abstract class BaseAdapter implements PlatformAdapter {
   getCurrentTime(): number {
     const video = this.getVideoElement()
     return video?.currentTime ?? 0
+  }
+
+  isPlaying(): boolean {
+    const video = this.getVideoElement()
+    return video ? !video.paused : false
+  }
+
+  getTranscript(): Promise<TranscriptSegment[]> {
+    return Promise.resolve([])
+  }
+
+  async getCurrentSegment(currentTime: number): Promise<string | null> {
+    const segments = await this.getTranscript()
+    if (segments.length === 0) return null
+
+    const segment = segments.find((s, i) => {
+      const nextStart = segments[i + 1]?.start ?? Infinity
+      return currentTime >= s.start && currentTime < nextStart
+    })
+
+    return segment?.text ?? null
   }
 }
